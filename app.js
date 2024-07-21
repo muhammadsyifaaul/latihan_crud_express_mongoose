@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-
+const methodOverride = require('method-override')
 const userRoutes = require('./routes/userRoutes')
 const expressLayouts = require('express-ejs-layouts')
 
 app.use(expressLayouts)
 app.use(express.urlencoded({extended: true}))
+app.use(methodOverride('_method'))
 
 app.set('view engine', 'ejs')
 app.set('layout', 'layouts/layout')

@@ -1,0 +1,21 @@
+<div class="row mt-4">
+    <div class="col-md-6">
+        <a href="/home" class="btn btn-primary badge mb-4">All Anime</a>
+        
+            <ul>
+                 <strong><li> Title :<%- anime.title %></li></strong>
+               
+                <li> Genre: <% anime.genre.forEach(genre => { %>
+                    <a href="/home?genre=<%= encodeURIComponent(genre) %>"><%= genre %></a>
+                    <% if (anime.genre.indexOf(genre) !== anime.genre.length - 1) { %>
+                     ,
+                    <% } %>
+                <% }) %> </li>
+        
+                <li> Rating : <%- anime.rating %></li>
+                <li> Status : <%- anime.status %></li>
+                <li> Type : <%- anime.type %></li>
+                <li>Description : <%- anime.description %></li>
+            </ul>
+    </div>
+</div>

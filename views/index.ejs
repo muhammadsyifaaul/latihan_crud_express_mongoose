@@ -1,1 +1,37 @@
-<h1>Hello Dunia</h1>
+<% if (msg) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert-message">
+        <%= msg %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <a href="/add" class="btn btn-success badge mb-4">Add Anime</a>
+        <% animes.forEach(anime => { %>
+            <ul>
+                 <strong><li> Title :<%- anime.title %></li></strong>
+               
+                <li> Genre: <% anime.genre.forEach(genre => { %>
+                    <a href="/home?genre=<%= encodeURIComponent(genre) %>"><%= genre %></a>
+                    <% if (anime.genre.indexOf(genre) !== anime.genre.length - 1) { %>
+                     ,
+                    <% } %>
+                <% }) %> </li>
+        
+                <li> Rating : <%- anime.rating %></li>
+                <li> Status : <%- anime.status %></li>
+                <li> Type : <%- anime.type %></li>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="/detail?title=<%= anime.title %>" class="btn btn-primary badge">Details</a>
+                <a href="/edit" class="btn btn-success badge">Edit</a>
+                <form action="/delete/<%= anime.id %>/?_method=DELETE" method="post">
+                    <button type="submit" class="btn btn-danger badge" onclick="return confirm('sure?')">Delete</button>
+                </form>
+                </div>
+            </ul>
+        <% }) %>
+    </div>
+</div>
