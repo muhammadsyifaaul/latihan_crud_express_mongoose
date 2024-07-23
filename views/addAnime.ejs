@@ -1,0 +1,33 @@
+<form method="post" action="/addAnime">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title Anime</label>
+      <input type="text" class="form-control" id="title" name="title">
+      
+    </div>
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <input type="text" class="form-control" id="genre" name="genre">
+    </div>
+    <div class="mb-3">
+      <label for="rating" class="form-label">Rating</label>
+      <input type="number" class="form-control" id="rating" name="rating">
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <input type="text" class="form-control" id="status" name="status">
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Type</label>
+      <select name="type" id="">
+        <option value="tv">TV</option>
+        <option value="movie">MOVIE</option>
+        <option value="ova">OVA</option>
+        <option value="ona">ONA</option>
+      </select>
+      <div class="mb-3">
+        <label for="description">Description</label>
+        <textarea name="description" id="" cols="50" rows="10"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
