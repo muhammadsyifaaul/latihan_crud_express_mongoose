@@ -1,35 +1,34 @@
-const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
-const methodOverride = require('method-override')
-const userRoutes = require('./routes/userRoutes')
-const expressLayouts = require('express-ejs-layouts')
-const ErrorHandler = require('./utils/ErrorHandler')
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const userRoutes = require('./routes/userRoutes');
+const expressLayouts = require('express-ejs-layouts');
+const { handleError, ErrorHandler } = require('./utils/errorHandler');
 
-app.use(expressLayouts)
-app.use(express.urlencoded({extended: true}))
-app.use(methodOverride('_method'))
+app.use(expressLayouts);
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-app.set('view engine', 'ejs')
-app.set('layout', 'layouts/layout')
-
-
+app.set('view engine', 'ejs');
+app.set('layout', 'layouts/layout');
 
 mongoose.connect('mongodb://127.0.0.1/anime_db2')
-.then(res => console.log('connected to mongodb'))
-.catch(err => console.log(err))
-app.use('/',userRoutes)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err));
+
+app.use('/', userRoutes);
+
+// Handle 404
 
 
-app.use((err,req,res) => {
-    const status = err.statusCode || 500
-    const message = err.message || 'Internal Server Error'
-    res.status(status).send(message)
-})
-
-app.use((req,res) => {
-    res.send('you are in the black hole')
-})
+// Error handler middleware
+app.use((err, req, res, next) => {
+    handleError(err, req, res);
+});
+app.use((req, res) => {
+    res.send('you are now in the black hole')
+});
 app.listen(3000, () => {
-    console.log('server is running')
-})
+    console.log('Server is running on port 3000');
+});
